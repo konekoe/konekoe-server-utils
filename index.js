@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const crypto = require('crypto');
 const jwt  = require('jsonwebtoken');
 const satelize = require('satelize');
@@ -54,7 +52,6 @@ function isValidDate(value) {
           return true;
         }
     }
-  }
 
   let err = Error('Not a valid date-time. Please give the date and time in this format: DD.MM.YYYY HH:MinMin');
   err.name = "ValidationError";
