@@ -87,7 +87,7 @@ function forAll(arr, cb) {
 
 function makeId(length) {
   //String of words separated by newlines
-  let words = execSync(`shuf -n${length} words`).toString();
+  let words = execSync(`shuf -n${length} ${ __dirname }/words`).toString();
   let temp = words.split('\n');
 
   //pop the newline.

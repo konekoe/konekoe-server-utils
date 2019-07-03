@@ -1,6 +1,6 @@
 {
   "name": "konekoe-server-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Konekoe serverside utilities",
   "main": "index.js",
   "scripts": {
