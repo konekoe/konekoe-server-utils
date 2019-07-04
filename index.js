@@ -61,12 +61,19 @@ function isValidDate(value) {
 
 function parseDate(value) {
   //expected form: DAY.MONTH.YEAR HOURS:MINS
-  let arr = value.split(' ');
-  let date = arr[0].split('.').map(value => parseInt(value));
-  let time = arr[1].split(':').map(value => parseInt(value));
-  date[1] -= 1;
+  try {
+    let arr = value.split(' ');
+    let date = arr[0].split('.').map(value => parseInt(value));
+    let time = arr[1].split(':').map(value => parseInt(value));
+    date[1] -= 1;
 
-  return new Date(date[2], date[1], date[0], time[0], time[1]);
+    return new Date(date[2], date[1], date[0], time[0], time[1]);
+  }
+  catch (err) {
+    let err = Error('Not a valid date-time. Please give the date and time in this format: DD.MM.YYYY HH:MinMin');
+    err.name = "ValidationError";
+    throw err;
+  }
 }
 
 function isValidURL(value) {
