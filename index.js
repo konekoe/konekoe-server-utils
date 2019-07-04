@@ -69,7 +69,7 @@ function parseDate(value) {
 
     return new Date(date[2], date[1], date[0], time[0], time[1]);
   }
-  catch (err) {
+  catch (e) {
     let err = Error('Not a valid date-time. Please give the date and time in this format: DD.MM.YYYY HH:MinMin');
     err.name = "ValidationError";
     throw err;
