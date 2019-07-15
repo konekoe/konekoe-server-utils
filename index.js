@@ -3,6 +3,7 @@ const jwt  = require('jsonwebtoken');
 const satelize = require('satelize');
 const { execSync } = require('child_process');
 
+const urlCheck = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
 
 function createToken(payload, privateKey, options) {
 
@@ -77,8 +78,8 @@ function parseDate(value) {
 }
 
 function isValidURL(value) {
-  if (!URL.test(value)) {
-    throw new Error('Not a valid address. Do not start the address with http:// or https://');
+  if (!urlCheck.test(value)) {
+    throw new Error('Not a valid address.');
   }
   return true;
 }
@@ -126,7 +127,7 @@ function createConfig(obj, files, fields) {
   if (files) {
     result.files = files;
   }
-  
+
   return result;
 }
 
