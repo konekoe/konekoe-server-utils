@@ -115,15 +115,18 @@ function createConfig(obj, files, fields) {
 
   //Make sure that only necessary fields are included.
   for (key of fields) {
-    result[key] = obj[key];
+    let value = obj[key];
+
+    if (key === "examStart" || key === "examEnd")
+      value = parseDate(value);
+
+    result[key] = value;
   }
 
   if (files) {
     result.files = files;
   }
-  result['examStart'] = parseDate(result['examStart']);
-  result['examEnd'] = parseDate(result['examEnd']);
-
+  
   return result;
 }
 
