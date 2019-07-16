@@ -121,6 +121,9 @@ function createConfig(obj, files, fields) {
     if (key === "examStart" || key === "examEnd")
       value = parseDate(value);
 
+    if (key === "restrictedUrls")
+      value = value.filter(url => url.length > 0);
+      
     result[key] = value;
   }
 
