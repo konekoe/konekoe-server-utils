@@ -8,7 +8,7 @@ const codeDigits = "23456789BCDFGHJKMNPQRTVWXY";
 function createToken(payload, privateKey, options) {
 
   return jwt.sign(payload, privateKey, options);
-}
+};
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -25,20 +25,20 @@ async function timeZoneOfIp(ip) {
       return resolve(payload);
     });
   });
-}
+};
 
 function verifyToken(token, publicKey, options) {
   return jwt.verify(token, publicKey, options);
-}
+};
 
 function decodeToken(token) {
     return jwt.decode(token, {complete: true});
- }
+ };
 
 function dateToString(date) {
   //TODO: Expand to include different formats.
   return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-}
+};
 
 function isValidDate(value) {
     let d = parseDate(value);
@@ -64,7 +64,7 @@ function isValidDate(value) {
   err.name = "ValidationError";
   throw err;
 
-}
+};
 
 function parseDate(value) {
   //expected form: DAY.MONTH.YEAR HOURS:MINS
@@ -81,7 +81,7 @@ function parseDate(value) {
     err.name = "ValidationError";
     throw err;
   }
-}
+};
 
 function isValidURL(value) {
   if (!urlCheck.test(value)) {
@@ -96,7 +96,7 @@ function forAll(arr, cb) {
     flag = cb(arr[i]);
   }
   return flag;
-}
+};
 
 
 function makeId(length) {
@@ -105,7 +105,7 @@ function makeId(length) {
 
   return temp.map(n => codeDigits[getRandomInt(0, digitsLength)]).join('');
 
-}
+};
 
 function createConfig(obj, files, fields) {
 
@@ -130,7 +130,7 @@ function createConfig(obj, files, fields) {
   }
 
   return result;
-}
+};
 
 var genRandomString = function(length){
     return crypto.randomBytes(Math.ceil(length/2))
@@ -146,17 +146,17 @@ function sha512(password, salt){
         salt:salt,
         passwordHash:value
     };
-}
+};
 
 function encrypt(userpassword) {
     var salt = genRandomString(16); /** Gives us salt of length 16 */
     var passwordData = sha512(userpassword, salt);
     return passwordData;
-}
+};
 
 function checkPassword(hash, salt, password) {
   return hash === sha512(password, salt).passwordHash;
-}
+};
 
 
 module.exports = {
