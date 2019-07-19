@@ -1,14 +1,20 @@
 const crypto = require('crypto');
 const jwt  = require('jsonwebtoken');
 const satelize = require('satelize');
-const { execSync } = require('child_process');
 
 const urlCheck = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+const codeDigits = "23456789BCDFGHJKMNPQRTVWXY";
 
 function createToken(payload, privateKey, options) {
 
   return jwt.sign(payload, privateKey, options);
 }
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+};
 
 async function timeZoneOfIp(ip) {
   return new Promise ((resolve, reject) => {
@@ -94,18 +100,10 @@ function forAll(arr, cb) {
 
 
 function makeId(length) {
-  //String of words separated by newlines
-  let words = execSync(`shuf -n${length} ${ __dirname }/words`).toString();
-  let temp = words.split('\n');
+  const temp = new Array(length).fill(0);
+  const digitsLength = codeDigits.length;
 
-  //pop the newline.
-  temp.pop();
-
-  let first = temp.shift();
-  temp = temp.map((w) => {return w.charAt(0).toUpperCase() + w.slice(1);});
-  temp.unshift(first);
-
-  return temp.join('');
+  return temp.map(n => codeDigits[getRandomInt(0, digitsLength)]).join('');
 
 }
 
@@ -123,7 +121,7 @@ function createConfig(obj, files, fields) {
 
     if (key === "restrictedUrls")
       value = value.filter(url => url.length > 0);
-      
+
     result[key] = value;
   }
 
