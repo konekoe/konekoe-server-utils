@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const jwt  = require('jsonwebtoken');
 const satelize = require('satelize');
 
-const urlCheck = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+const urlCheck = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
 const codeDigits = "23456789BCDFGHJKMNPQRTVWXY";
 
 function createToken(payload, privateKey, options) {
