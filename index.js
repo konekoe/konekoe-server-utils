@@ -171,5 +171,6 @@ module.exports = {
   createToken,
   verifyToken,
   decodeToken,
-  timeZoneOfIp
+  timeZoneOfIp,
+  getRandomInt
 };
